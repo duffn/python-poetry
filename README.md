@@ -2,18 +2,18 @@
 
 ## What is this?
 
-A series of [Python Docker images](https://quay.io/repository/duffn/python-poetry) that use [`poetry`](https://python-poetry.org/) as the dependency manager. These images also:
+A series of [Python Docker images](https://hub.docker.com/r/duffn/python-poetry) that use [`poetry`](https://python-poetry.org/) for dependency management. These images also:
 
+- Create a virtual environment in `/venv`.
 - Install [`tini`](https://github.com/krallin/tini) for simple `init`.
 - Use a [non-root user and a UID above 10000](https://github.com/hexops/dockerfile#run-as-a-non-root-user).
-- Create a virtual environment in `/venv`.
 
 ## Usage
 
 ### Simple
 
 ```dockerfile
-FROM quay.io/duffn/python-poetry:3.9-slim
+FROM duffn/python-poetry:3.9-slim
 
 COPY pyproject.toml poetry.lock ./
 # Poetry is installed with `pip`, so active our virtual environmentn and install projects dependecies there, so they don't conflict with poetry's dependencies.
@@ -35,7 +35,7 @@ ENTRYPOINT ["tini", "--", "./my-start-command.sh"]
 ### Multi-stage Build
 
 ```dockerfile
-FROM quay.io/duffn/python-poetry:3.9-slim as base
+FROM duffn/python-poetry:3.9-slim as base
 
 COPY ./poetry.lock ./pyproject.toml ./
 # Only install the production dependencies in our base multi-stage build.
@@ -83,6 +83,14 @@ set -e
 
 flask run --host=0.0.0.0
 ```
+
+## Tags
+
+All images use the [official Python images](https://hub.docker.com/_/python) as their base.
+
+- The `X.X-<name>` tags, for example `3.9-slim`, are all based on the `main` branch and should use the [most recent version of `poetry`](https://github.com/python-poetry/poetry/releases).
+- If you'd like, you can also pin to a specific version of `poetry` using the `X.X-<name>-X.X.X` tags, where `X.X.X` is a version of `poetry` staring with the minimum version of `1.1.4`. For example, `3.9-slim-1.1.4`.
+  - You can find all available tags on [Docker Hub](https://hub.docker.com/repository/docker/duffn/python-poetry/tags?page=1&ordering=last_updated).
 
 ## License
 
