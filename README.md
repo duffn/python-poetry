@@ -44,8 +44,7 @@ RUN . $VENV_PATH/bin/activate && $POETRY_HOME/poetry install --no-root --no-dev
 # Development image
 FROM base as development
 
-# Copy installed production dependencies from the base image and then install the development dependencies as well.
-COPY --from=base $VENV_PATH $VENV_PATH
+# Install the development dependencies as well in our development target.
 RUN . $VENV_PATH/bin/activate && $POETRY_HOME/poetry install --no-root
 
 WORKDIR /app
@@ -62,9 +61,7 @@ ENTRYPOINT ["tini", "--", "./my-start-command.sh"]
 # `docker build --target production -t my-image:latest .`
 FROM base as production
 
-# Copy production dependecies from the base image. There's no need to install anything more.
-COPY --from=base $VENV_PATH $VENV_PATH
-
+# No need to install dependenices here as we have the production dependencies in our base image.
 WORKDIR /app
 COPY . .
 
