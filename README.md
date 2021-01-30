@@ -2,7 +2,7 @@
 
 ## What is this?
 
-A series of Docker Python images that use `poetry` as the dependency manager. These images also:
+A series of [Python Docker images](https://quay.io/repository/duffn/python-poetry) that use [`poetry`](https://python-poetry.org/) as the dependency manager. These images also:
 
 - Install [`tini`](https://github.com/krallin/tini) for simple `init`.
 - Use a [non-root user and a UID above 10000](https://github.com/hexops/dockerfile#run-as-a-non-root-user).
@@ -13,7 +13,7 @@ A series of Docker Python images that use `poetry` as the dependency manager. Th
 ### Simple
 
 ```dockerfile
-FROM duffn/python-poetry:3.9-slim
+FROM quay.io/duffn/python-poetry:3.9-slim
 
 COPY pyproject.toml poetry.lock ./
 # Poetry is installed with `pip`, so active our virtual environmentn and install projects dependecies there, so they don't conflict with poetry's dependencies.
@@ -35,7 +35,7 @@ ENTRYPOINT ["tini", "--", "./my-start-command.sh"]
 ### Multi-stage Build
 
 ```dockerfile
-FROM duffn/python-poetry:3.9-slim as base
+FROM quay.io/duffn/python-poetry:3.9-slim as base
 
 COPY ./poetry.lock ./pyproject.toml ./
 # Only install the production dependencies in our base multi-stage build.
