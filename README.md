@@ -5,7 +5,7 @@
 A series of [Python Docker images](https://hub.docker.com/r/duffn/python-poetry) that use [`poetry`](https://python-poetry.org/) for dependency management. Because this is what I tend to do, these images also:
 
 - Install [`tini`](https://github.com/krallin/tini) for simple `init`.
-- Use a [non-root user and a UID above 10000](https://github.com/hexops/dockerfile#run-as-a-non-root-user).
+- Use a [non-root user and a UID above 9999](https://github.com/hexops/dockerfile#run-as-a-non-root-user).
 
 ## Usage
 
