@@ -28,7 +28,8 @@ RUN chown 10000:10001 -R /app
 USER nonroot
 
 # Use `tini` to start our container.
-ENTRYPOINT ["tini", "--", "./my-start-command.sh"]
+ENTRYPOINT ["tini", "--"]
+CMD ["./my-start-command.sh"]
 ```
 
 ### Multi-stage Build
@@ -53,7 +54,8 @@ RUN chown 10000:10001 -R /app
 
 USER nonroot
 
-ENTRYPOINT ["tini", "--", "./my-start-command.sh"]
+ENTRYPOINT ["tini", "--"]
+CMD ["./my-start-command.sh"]
 
 # Production image
 # Build only a single target with the --target production flag.
@@ -68,7 +70,8 @@ RUN chown 10000:10001 -R /app
 
 USER nonroot
 
-ENTRYPOINT ["tini", "--", "./my-start-command.sh"]
+ENTRYPOINT ["tini", "--"]
+CMD ["./my-start-command.sh"]
 ```
 
 `my-start-command.sh` could look something like:
@@ -87,7 +90,7 @@ flask run --host=0.0.0.0
 
 All images use the [official Python images](https://hub.docker.com/_/python) as their base.
 
-- The `X.X-<name>` tags, for example `3.9-slim`, are all based on the `main` branch and should use the [most recent version of `poetry`](https://github.com/python-poetry/poetry/releases).
+- The `X.X-<name>` tags, for example `3.9-slim` should use the [most recent version of `poetry`](https://github.com/python-poetry/poetry/releases).
 - If you'd like, you can also pin to a specific version of `poetry` using the `X.X-<name>-X.X.X` tags, where `X.X.X` is a version of `poetry` starting with the minimum version of `1.1.4`. For example, `3.9-slim-1.1.4`.
   - You can find all available tags on [Docker Hub](https://hub.docker.com/repository/docker/duffn/python-poetry/tags?page=1&ordering=last_updated).
 
