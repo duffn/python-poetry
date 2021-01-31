@@ -2,9 +2,8 @@
 
 ## What is this?
 
-A series of [Python Docker images](https://hub.docker.com/r/duffn/python-poetry) that use [`poetry`](https://python-poetry.org/) for dependency management. These images also:
+A series of [Python Docker images](https://hub.docker.com/r/duffn/python-poetry) that use [`poetry`](https://python-poetry.org/) for dependency management. Because this is what I tend to do, these images also:
 
-- Create a virtual environment in `/venv`.
 - Install [`tini`](https://github.com/krallin/tini) for simple `init`.
 - Use a [non-root user and a UID above 10000](https://github.com/hexops/dockerfile#run-as-a-non-root-user).
 
