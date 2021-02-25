@@ -16,7 +16,7 @@ ENV PYTHONUNBUFFERED=1 \
     TINI_VERSION=${TINI_VERSION}
 
 RUN apk update \
-    && apk add gcc musl-dev libffi-dev openssl-dev python3-dev
+    && apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo
 
 RUN wget --no-check-certificate --quiet https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-amd64 \
     && wget --no-check-certificate --quiet https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-amd64.sha256sum \
