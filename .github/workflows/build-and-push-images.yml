@@ -34,8 +34,9 @@ jobs:
       - name: Build and push
         env:
           POETRY_VERSION: 1.1.4
+          DOCKER_REPOSITORY: duffn/python-poetry
         uses: docker/build-push-action@v2
         with:
           context: ./docker/${{ matrix.image }}
           push: true
-          tags: ${{ matrix.image }},${{ matrix.image }}-${{ env.CURRENT_DATE }},${{ matrix.image }}-${{ env.POETRY_VERSION }},${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
+          tags: ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
