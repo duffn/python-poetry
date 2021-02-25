@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    name: Build and push Docker images
+    strategy:
+      fail-fast: true
+      matrix:
+        image:
+          - "3.6.6-stretch"
+          - "3.7-slim"
+          - "3.7-stretch"
+          - "3.8-slim"
+          - "3.9-alpine"
+          - "3.9-buster"
+          - "3.9-slim"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Get current date
+        run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Build and push
+        env:
+          POETRY_VERSION: 1.1.4
+          DOCKER_REPOSITORY: duffn/python-poetry
+        uses: docker/build-push-action@v2
+        with:
+          context: ./docker/${{ matrix.image }}
+          push: true
+          tags: ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
