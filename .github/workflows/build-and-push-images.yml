@@ -36,7 +36,7 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Build and push
         env:
-          POETRY_VERSION: 1.1.6
+          POETRY_VERSION: 1.1.7
           DOCKER_REPOSITORY: duffn/python-poetry
         uses: docker/build-push-action@v2
         with:
