@@ -20,6 +20,9 @@ jobs:
           - "3.9-alpine"
           - "3.9-buster"
           - "3.9-slim"
+          - "3.10-alpine"
+          - "3.10-buster"
+          - "3.10-slim"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
