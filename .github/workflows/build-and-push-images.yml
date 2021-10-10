@@ -1,9 +1,9 @@
 name: ci
 
 on:
-  push
-  # branches:
-  #   - "main"
+  push:
+    branches:
+      - "main"
 
 jobs:
   docker:
@@ -54,6 +54,10 @@ jobs:
           context: ./docker/${{ matrix.image }}
           push: true
           tags: |
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }}
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
             ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}
             ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }}
             ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}
