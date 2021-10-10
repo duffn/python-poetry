@@ -1,9 +1,9 @@
 name: ci
 
 on:
-  push:
-    branches:
-      - "main"
+  push
+  # branches:
+  #   - "main"
 
 jobs:
   docker:
@@ -37,6 +37,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Get current date
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Build and push
@@ -47,4 +53,8 @@ jobs:
         with:
           context: ./docker/${{ matrix.image }}
           push: true
-          tags: ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }},${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
+          tags: |
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }}
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
