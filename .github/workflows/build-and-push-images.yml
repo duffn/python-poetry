@@ -12,23 +12,16 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        image:
-          - "3.7-alpine"
-          - "3.7-buster"
-          - "3.7-bullseye"
-          - "3.7-slim"
-          - "3.8-alpine"
-          - "3.8-buster"
-          - "3.8-bullseye"
-          - "3.8-slim"
-          - "3.9-alpine"
-          - "3.9-buster"
-          - "3.9-bullseye"
-          - "3.9-slim"
-          - "3.10-alpine"
-          - "3.10-buster"
-          - "3.10-bullseye"
-          - "3.10-slim"
+        os:
+          - "alpine"
+          - "buster"
+          - "bullseye"
+          - "slim"
+        version:
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -55,14 +48,14 @@ jobs:
           DOCKER_REPOSITORY: duffn/python-poetry
         uses: docker/build-push-action@v2
         with:
-          context: ./docker/${{ matrix.image }}
+          context: ./docker/${{ matrix.os }}/${{ matrix.version }}
           push: true
           tags: |
-            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}
-            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }}
-            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}
-            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
-            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}
-            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.CURRENT_DATE }}
-            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}
-            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.image }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}-${{ env.CURRENT_DATE }}
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}-${{ env.POETRY_VERSION }}
+            ${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}-${{ env.CURRENT_DATE }}
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}-${{ env.POETRY_VERSION }}
+            ghcr.io/${{ env.DOCKER_REPOSITORY }}:${{ matrix.version }}-${{ matrix.os }}-${{ env.POETRY_VERSION }}-${{ env.CURRENT_DATE }}
