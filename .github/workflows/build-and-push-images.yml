@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and push Docker images
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os:
           - "alpine"
