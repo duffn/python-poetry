@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "python-poetry"
+version = "1.0.0"
+description = "Python Docker images that use poetry for dependency management."
+authors = ["https://github.com/duffn"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+jinja2 = "^3.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

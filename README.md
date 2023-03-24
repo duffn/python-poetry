@@ -88,12 +88,16 @@ flask run --host=0.0.0.0
 
 ## Tags
 
-All images use the [official Python images](https://hub.docker.com/_/python) as their base. All images are build when code is merged to the `main` branch.
+All images use the [official Python images](https://hub.docker.com/_/python) as their base. All images are built when code is merged to the `main` branch.
 
-- The `X.X-<name>` tags, for example `3.9-slim` should use the [most recent version of `poetry`](https://github.com/python-poetry/poetry/releases).
+- The `X.X-<name>` tags, for example `3.9-slim` use the the version of `poetry` [listed in the GitHub Action workflow in this repository](https://github.com/duffn/python-poetry/blob/main/.github/workflows/build-and-push-images.yml).
   - If you'd like, you can also pin to a specific version of `poetry` using the `X.X-<name>-X.X.X` tags, where `X.X.X` is a version of `poetry` starting with the minimum version of `1.1.4`. For example, `3.9-slim-1.1.4`.
-  - Furthermore, you can pin to a build to a specific date by using the `X.X-<name>-<date>` tags.
+  - _Recommended:_ Furthermore, you can pin to a build to a specific date by using the `X.X-<name>-<date>` tags.
 - You can find all available tags on [Docker Hub](https://hub.docker.com/repository/docker/duffn/python-poetry/tags?page=1&ordering=last_updated) or the [GitHub Container Registry](https://github.com/duffn/python-poetry/pkgs/container/python-poetry/versions).
+
+## Generation
+
+You can find the templates that all of the Dockerfiles are generated from in the `templates` directory.
 
 ## License
 
