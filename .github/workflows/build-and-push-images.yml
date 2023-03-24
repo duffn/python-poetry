@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "main"
-      - duffn/generate
 
 env:
   POETRY_VERSION: 1.4.1
