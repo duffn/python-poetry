@@ -43,7 +43,7 @@ PYTHON_VERSIONS = [
     "3.11.1",
     "3.11.2",
 ]
-POETRY_VERSION = "1.4.1"
+POETRY_VERSION = "1.4.2"
 
 logging.basicConfig(
     level="INFO", format="%(levelname)s:%(name)s:%(lineno)d:%(message)s"
