@@ -5,13 +5,6 @@ from jinja2 import Template
 
 BASE_IMAGES = ["alpine", "buster", "bullseye", "slim"]
 PYTHON_VERSIONS = [
-    "3.7",
-    "3.7.12",
-    "3.7.13",
-    "3.7.14",
-    "3.7.15",
-    "3.7.16",
-    "3.7.17",
     "3.8",
     "3.8.12",
     "3.8.13",
@@ -50,7 +43,7 @@ PYTHON_VERSIONS = [
     "3.11.3",
     "3.11.4",
 ]
-POETRY_VERSION = "1.5.1"
+POETRY_VERSION = "1.6.1"
 
 logging.basicConfig(
     level="INFO", format="%(levelname)s:%(name)s:%(lineno)d:%(message)s"
