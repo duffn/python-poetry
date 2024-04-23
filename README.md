@@ -1,5 +1,9 @@
 # python-poetry
 
+## Unmaintained
+
+This repository is unmaintained and will not be updated further.
+
 ## What is this?
 
 A series of [Python Docker images](https://hub.docker.com/r/duffn/python-poetry) that use [`poetry`](https://python-poetry.org/) for dependency management. Because this is what I tend to do, these images also:
